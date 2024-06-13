@@ -1,0 +1,20 @@
+// compilerOptions é onde as opções do compilador serão adicionadas
+
+//outDir signfica que o compilador fará sua função (compilar) no diretório enviado.
+
+//target serve para escolher em qual versão do EcmaScript o compilador irá reescrever o código.
+
+//include recebe o caminho no qual o compilador localizará o os arquivos Ts para compilar, no caso aqui "**" significa que ele compilará de todos os arquivos com a extensão ts que está dentro de app.
+
+//noEmiteOnError o compilador não cria ou altera a pasta compilada de js enquanto houver algum de errado com o código.
+
+{
+    "compilerOptions": {
+        "outDir": "dist/js",
+        "target": "ES6",
+        "noEmitOnError": true
+    },
+    "include": ["app/**/*"]
+}
+
+// Para configurar o ativador do script basta ir em package.json e adicionar a parte de scripts. "nome do script": tsc (executa o compilador). Para executar basta digitar "npm run nome do script" que no caso deste projeto é compile.

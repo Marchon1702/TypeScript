@@ -1,0 +1,17 @@
+para compilar um arquivo typeScript com JavaScript devemos instalar o typeScript globalmente.
+
+npm typeScript -g (caso já não tenha instalado)
+
+após isso digitamos no terminal
+
+tsc (nome do arquivo typeScript) nesse caso "tsc app.ts"
+
+isso criará um arquivo Js que devera ser posto na tah script do HTML 
+
+<script src="app.js"></script>
+
+caso queriamos alterar o app.js toda vez q fizermos algo no Ts teriamos que repetir o processo de tsc app.ts toda vez q houvesse algum alteração.
+
+para automatizar este processo basta digitar no terminal:
+
+tsc app.js -w (isso fará com que o arquivo "vigie as mudanças no app.ts e passe para o app.js automaticamente.")

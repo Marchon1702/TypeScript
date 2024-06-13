@@ -1,0 +1,5 @@
+Por padrão o typeScript adota o tipo das variaveis como any, isso não é muito vantajoso, então para mudar isso basta ir em "compileOptions" e adicionar o atributo "noImplicityAny": true. Sendo assim as variaveis que serão atribuidas posteriormente devem ter um tipo declarada.
+
+types (Date, number, string, HTMLInputElement: para elementos de input no HTML.)
+
+types de funções (void: significa que a função não retorna nada, caso contrario qualquer outro retorno pode ser declarado).

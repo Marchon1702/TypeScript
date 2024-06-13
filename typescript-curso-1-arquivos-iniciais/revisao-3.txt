@@ -1,0 +1,3 @@
+ReadonlyArray é uma declaração de tipo que retorna apenas um array legivel, não modificavel, isto serve para mantermos a integridade da nossa variavel private ao executar um metodo dela em outro local.
+
+Ao declarar uma variavel que seja um array usamos o type Arra<tipo de dado que ele terá>, caso seja mais de um basta definirmos como any. Quando o tippo de dado for uma instacia digitamos o nome da instacia dentro de <>.
