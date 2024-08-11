@@ -1,0 +1,20 @@
+Carregamento de Módulos
+
+Módulos são possíveis com o Node.js, que nos permite automatizar o sistema de hierarquia de códigos. Se utilizássemos apenas scripts, teríamos que adicionar manualmente os scripts no arquivo HTML, seguindo a forma correta de hierarquia, o que aumentaria a chance de erros. Com o carregamento de módulos, podemos utilizar import e export entre diversos módulos (scripts) e incluir apenas um módulo app.js na aplicação.
+
+Criação de Classe com Variáveis Privadas
+
+Ao criar uma classe com variáveis privadas, denotadas por "#", não podemos alterar o valor delas diretamente, exceto por métodos internos da própria classe.
+
+Caso o desenvolvedor tente alterar uma variável privada adicionando seu nome e um novo valor, a classe adicionará um novo atributo com o mesmo nome do anterior e o novo valor adicionado, criando um atributo totalmente independente do anterior.
+
+A única forma de acessar variáveis privadas é criando getters.
+
+Exemplo:
+
+get data() {
+    return this.#data;
+}
+
+Para acessar #data através do getter, use:
+console.log(negociacao.data);

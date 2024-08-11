@@ -1,0 +1,38 @@
+Instalação do TypeScript
+
+Podemos instalar os TS nas devDependencies do projeto com o comando
+"npm install typescript --save-dev"
+
+Configurações de compilação
+
+Temos uma base padrão para compilar o TypeScript, dentro da raiz do projeto criamos um arquivo chamado "tsconfig.json".
+
+Dentro desses arquivo temos confugurações básicas em compilerOptions.
+
+{
+    "compilerOptions": {
+        outDir: "dist/js",
+        "target": "ES6",
+        noEmitOnError: true
+    },
+    include: ["app/**/*"]
+}
+
+outDir = local onde será gerado a compilação.
+target = para qual versão ECMA Script será compilado.
+noEmitOnError = false (a compilação é feita até mesmo se houve erro), true (só é feita se estiver tudo certo).
+
+include= [caminho onde os arquivos typescript estão para serem compilados]
+
+Configurações de Script 
+
+Para que a compilação seja feita de forma única usamos o "tsc". Nesse projeto o comando tsc foi nomeado oara compile. Então sua execução deve ser feita com npm run compile.
+
+No intuito de dinamizar o ambiente de desenvolvimento podemos gerar um vigia para compilar os arquivos de forma automática a cada alteração feita.
+
+Esse script se chama "tsc -w", nesse projeto foi renomeado para watch.
+
+Quando inciamos o servidor liveServer usamos o npm run server e quando iniciamos o compilador usamos o npm run watch, através do concurrent, podemos configurar a execução dos dois scripts ao mesmo tempo com o  "start": "concurrently \"npm run watch\" \"npm run server\""
+
+Então para iniciarmos os dois scripts basta escrever npm run start.
+
