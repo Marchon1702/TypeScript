@@ -1,0 +1,17 @@
+Conceitos de tipagem no typeScript
+
+Por padrão todos os dados em typeScript possuem o tipo any, isso torna o código menos objetivo na sua criação. Para desligarmos essa atribuição any automática, basta adicionarmos o atributo "noImplicityAny = true" em compilerOptions.
+
+Alguns tipos de dados 
+
+Alguns tipos de dados do typeScript são baseados nos tipos de dados padrão do Js, temos o number, string, boolean, Date (quando adicionamos este, significa que a variavel reberá uma instância da classe Date) e isso se repete a qualquer outra classe padrão do Js ou criada por nós.
+
+Atribuição de tipagem nas funções
+
+Devemos atribuir o tipo de dado que os parâmetros criados devem retornar nas funções da seguinte forma, "função(n1: number, n2: number, result: string)", outra atribuição de tipagem nas funções são o "void" (significa que esta função não retornará nada) e o "tipo de dado em sí", que será atribuido quando a função retornar aquele tipo.
+
+Casos de uso de tipagem
+
+Sempre que uma variavel ou atributo for declarado mas não tiver valor literal definido ex: "let nome". Significa que essa variavel terá um valor atribuido futuramente pelo usuario ou algo assim, então usamos a tipagem nessa variavel para que o TypeScript entenda que o valor que essa variavel receberá tem que ser nesse caso uma string, então atribuimos "let nome: string".
+
+Quando uma variavel já e difinida com um valor não é necessário a atribuição do tipo de dado porque ja está implícito.

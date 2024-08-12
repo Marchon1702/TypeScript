@@ -1,0 +1,12 @@
+Tipando arrays
+
+Como todos os outros tipos de dados também devemos tipar Arrays. Podemos fazer isso de uma forma bem simples com a seguinte sintax: 
+"const arrayNumeros: Array<number> = [1, 2, 3]".
+
+Quando declaramos arrays, devemos adicionar a estrutura de dados "Array" e quais tipos de dados seus vetores irã comportar, no caso acima <number>.
+
+Se fossemos declarar um array com instâncias de alguma classe, a declaração do tipo de dados seria Array<Classe Instanciada>.
+
+ReadOnlyArray
+
+Quado quisermos transformar um array em imutável, ou seja, ele não pode ser modificado diretamente, podemos usar o spread oparetor: "[...novoArray]", ou então podemos usar o método ReadOnlyArray, ReadOnlyArray<Tipo de dado>.
