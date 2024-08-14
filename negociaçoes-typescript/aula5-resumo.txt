@@ -1,0 +1,110 @@
+Aprendendo como simplificar os códigos com TypeScript
+
+Ao criar uma class, podemos adicionar os atributos private ou public antes do constructor e após isso dizer que esse atributos receberão os valor de seus parâmetros.
+
+Ex: class Pessoa {
+    private _nome: string
+    private _idade: number,
+    private _altura: number
+
+    constructor(nome: string, idade: number, altura: number) {
+        this._nome = nome,
+        this._idade = idade,
+        this._altura = altura 
+    }
+}
+
+Podemos simplíficar o código de maneira significativa usando a senguinte sintax:
+
+Ex: class Pessoa {
+    constructor(
+        private nome: string,
+        private idade: number,
+        private altura: number
+        ) {}
+}
+
+Dessa forma o TypeScript entenderá que vc quer declarar os atributos e que seu valores serão os argumentos que serão passados no constructor de uma nova instância.
+
+Forma de simplificar declaração de arrays
+
+A forma mais verbosa de se declarar um array em TypeScript é a seguinte:
+
+const newArray: Array<tipoDeDados> = []
+
+A forma simplificada disso é a seguinte:
+
+const newArray: tipoDeDados[] = []
+
+Declaracão simplificada de array em retorno de funções
+
+get retornaArray(): tipoDeDados[] {
+    return newArray
+}
+
+Retorno de array com ReadOnlyArray de forma simplificada.
+
+get retornaArray(): readonly tipoDeDados[] {
+    return newArray
+}
+
+Reduzindo excesso de getters.
+
+Ao invés de fazermos vários getters dentro de uma classe pelo fato dos seus atributos serem private, podemos torna-los public e adicionar o readonly neles.
+
+export class Negociacao {
+  private _data: Date;
+  private _quantidade: number;
+  private _valor: number;
+
+  constructor(data: Date, quantidade: number, valor: number) {
+    this._data = data;
+    this._quantidade = quantidade;
+    this._valor = valor;
+  }
+
+  get data(): Date {
+    return this._data
+  }
+
+  get quantidade(): number {
+    return this._quantidade
+  }
+
+  get valor(): number {
+    return this._valor
+  } 
+}...
+
+Esse script acima pode se tornar bem mais simples
+
+Ex: export class Negociacao {
+  private _data: Date;
+  public readonly _quantidade: number;
+  public readonly  _valor: number;
+
+  constructor(data: Date, quantidade: number, valor: number) {
+    this._data = data;
+    this._quantidade = quantidade;
+    this._valor = valor;
+  }
+
+  get data(): Date {
+    return this._data
+  }
+}
+
+Adicionando readonly nos atributos acima eles poderão ser lidos, mas não mutados ou seja, não será aceito novas atribuições de valores a eles.
+
+Resolvendo problemas de atribuições com do _data utilzando programação defensiva.
+
+Se adicionar o método readonly no data, não irá funcionar, pois ele é um objeto que possui métodos internos, ou seja, ele NÃO aceitará atribuições diretas como "negociacao._data = 12/12/2012". Porém, se usarmos algum método do Date nele, será aceito.
+
+Para resolvermos isso temos que deixar ele como uma variavel privada e modificar seu getter.
+
+Ex: get data(): Date {
+    const data = new Date(this._data.getTime())
+    return data
+}
+
+Assim o getter data irá retornar uma cópia do _data, usando o método getTime(), que é capaz de "espelhar" um objeto Date e retornar uma nova instância igual a "espelhada". 
