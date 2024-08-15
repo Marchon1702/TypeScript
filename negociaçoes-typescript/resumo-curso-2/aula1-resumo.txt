@@ -1,0 +1,21 @@
+Tipos de implementação de elementos HTML
+
+Imperativa: Quando escrevemos o código direto no HTML, ou então usamos document.createElement no script para criar um elemento.
+
+Declarativa: Usada por frameworks como React, essa declaração ocorre quando criamos uma lógica para que somente o elemento modfiicado seja renderizado.
+
+Como fazer uma implementação declarativa utilizando classes.
+
+Apesar de não ser algo usado em produção, temos como um bom exercicio aprender a fazer um "micro framework" com classes.
+Criando uma classe nova na pasta view, podemos usar um método desta classe como template de criação. Esse método retornará uma template string que nos possibilita usar typeScript/Js no meio da string, assim você pode escrever um código Html dentro dessa template String e retorna-lo com innerHTML do elemento pai.
+
+Como criar um elemento pai para o método Template.
+
+Criamos uma div ou section no HTML e atribuimos uma atribuição para ela Ex: <div id="elementoPai"></div>.
+
+Como impletar o elemento Pai com o template.
+
+Podemos criar um parâmetro na classe da pasta view chamado seletor, e um atributo para ser o elemento. Na declaração deste atributo dentro de constructor(), podemos relativizar ele com a div pai criada, através de document.querySelector(seletor).
+Quando criarmos uma instancia da classe da pasta view podemos declarar como argumento para seletor o id da div pai. 
+Após criado o método template e localizar a div pai, temos que criar o método update, que terá a função de adicionar o template no innerHTML da div pai. Depois temos que usar o retorno do template no metodo update para adiciona-lo no innerHTML. Depois é só chamar o método update no evento desejado.
+
