@@ -1,0 +1,76 @@
+Alterando privacidade de métodos
+
+Assim com atributos, métodos também podem ser public, private ou protected. Se soubermos que determinado método só será usado dentro da classe, é uma boa prática definirmos ele como private.
+
+Ex: class metodos {
+    public metodo1() {
+        metodo2()
+        metodo3()
+    }
+
+    private metodo2() {}
+
+    private metodo3() {}
+}
+
+No exemplo acima podemos reparar quer o método 2 e 3 são chamados apenas no método 1 que é chamado em uma instância "lá fora". Então o correto é esses métodos internos serem definidos como private.
+
+Imagine uma situação onde o método que está sendo usado dentro da sua classe filha também não será chamado lá fora por ela.
+
+Ex: class Pai {
+    public metodoPai1() {}
+
+    protected metodopai2() {}
+
+    protected abstract metodopai3() 
+}
+
+class filha extends pai {
+    public metodoPai1() {
+        metodopai2() 
+    }
+
+    protected metodopai3() {
+        ...lógica
+    }
+}
+
+No exemplo acima só um método da classe pai é chamado fora da classe, então o correto a se fazer nessa situação é definir os outros métodos como protected, ou seja, somente seus filhos podem usar e só será visivel para eles.
+
+E caso tenhamos um método abstract na classe pai, quando formos redefini-lo na classe filho ele terá que se redeclarado como protected ou então ocorrerá um erro de compilação. Ou seja, o protected na classe filho só serve para dizer que ela está pegando algo do pai e somente ela pode mexer nisso.
+
+Método de Date() chamado getDay().
+
+Esse método retorna os dias da semana representados em numeros começando com 0 sendo Domingo e terminando em 6 sendo Sábado.
+
+Enumerations
+
+Enumerations conhecida também por enums, é um grupo de variáves encapsulado em um "nicho", que servem para ser usados em toda aplicação, e essas variáveis não podem ter seu valor modificado sem ser dentro do próprio enum.
+
+Ex: export enums DiasDaSemana {
+    DOMINGO = 0,
+    SEGUNDA = 1,
+    TERCA = 2,
+    QUARTA = 3,
+    QUINTA = 4,
+    SEXTA = 5,
+    SABADO = 6
+}
+
+Por padrão, quando declaramos variáveis elas recebem os valores de numeros relativizados com a ordem de declaração delas, é uma boa prática explicitar isso mesmo assim como foi feito a cima. Caso não seja explicitado se houver troca de ordem de variaveis de forma indesejada isso resultará em um erro não detectavél que poderá custar horas de avaliação.
+
+Outro detalhe sobre Enums é que se vc declarar somente uma variavel com algum numero especifico, as outras em sequância receberão valores posteriores a o ultimo número declarado.
+
+Ex: Ex: export enums DiasDaSemana {
+    DOMINGO,
+    SEGUNDA = 4
+    TERCA,
+    QUARTA,
+    QUINTA,
+    SEXTA,
+    SABADO
+}
+
+DOMINGO será 0, mas após a declaração de SEGUNDA sendo 4, os próximos serão 5, 6, 7, 8 ,9.
+
+Uma última informação sobre enums é que elas podem receber valores diferentes de numeros, como strings e etc...
