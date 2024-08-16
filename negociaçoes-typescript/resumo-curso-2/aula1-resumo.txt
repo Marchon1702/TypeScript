@@ -19,3 +19,7 @@ Podemos criar um parâmetro na classe da pasta view chamado seletor, e um atribu
 Quando criarmos uma instancia da classe da pasta view podemos declarar como argumento para seletor o id da div pai. 
 Após criado o método template e localizar a div pai, temos que criar o método update, que terá a função de adicionar o template no innerHTML da div pai. Depois temos que usar o retorno do template no metodo update para adiciona-lo no innerHTML. Depois é só chamar o método update no evento desejado.
 
+Formatação de datas com Intl.
+
+Parar exibir uma data de acordo com a formatação do país do usuario. podemos usar o método "new Intl.DateTimeFormat().format(variavel do tipo Date)".
+

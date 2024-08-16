@@ -1,0 +1,55 @@
+Criando uma classe Pai.
+
+Para criar uma classe pai devemos declarar o nome dela seguidos de extends nas classes filhas.
+
+Ex: class Filha extends Pai {
+    //....
+}
+
+Agora todos os métodos da classe pai serão validos na classe filha.
+
+Criando umétodos Gerenics na classe pai.
+
+Se tivermos métodos genericos na classe pai que nem sempre retornam o mesmo tipo de dado, podemos adicionar "<T>" na classe pai e como argumentos de seus métodos.
+
+Ex: class Pai<T> {
+    método(parâmetro: T)
+}
+
+Isso fará com que o tipo de dado que o método retorna seja definido na re-criação do método na classe filha.
+
+Ex: class Filha extends Pai<string> {
+    método(parâmetro: string)
+}
+
+Atenção: Podemos definir mais de um tipo genérico caso seja necessário. 
+
+Ex: class Pai<T, K> {
+    método(parâmetro: T): K
+}
+
+Basta declarar em ordem na classe filha.
+
+Ex: class Filha extends Pai<string, number> {
+    método(parâmetro: string): number
+}
+
+Como permitir que apenas os filhos acessem e modifiquem os atributos de uma classe pai.
+
+Use a declaração protected, isso fará com que os filhos possam "mexer na carteira do pai", mas para o resto da aplicação, aquele atributo ainda será inacessivel.
+
+Ex: class Pai {
+    protected elemento: HTMLElement;
+}
+
+class Filha extends Pai {
+    constructor(seletor) {
+        this.elemento = document.querySelector('seletor')
+    } 
+}
+
+Qualquer coisa diferente de uma filha na acessando a classe pai não será aceito.
+
+Atribuindo um abstract nas classes e métodos.
+
+O abstract é atribuido quando aquele método não será escrito naquela classe e sim em uma classe filha, em relação as classes o abstract só é definido quando aquela classe não tem utilidade ao ser instânciada, então o abstract bloqueia que ela tenha instâncias.
