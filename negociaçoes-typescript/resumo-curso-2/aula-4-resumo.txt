@@ -1,0 +1,31 @@
+Criando uma método estático para podermos chamar métodos sem precisar instanciar uma classe.
+
+Ex: public static metodo() {
+    ...logica
+}
+
+Isso faz com que não seja necessário instanciar uma classe par usarmos determinado método. Supondo que o método da sua classe gere uma nova instância, Basta chamar esse método da seguinte forma:
+
+const pessoa1 = Pessoa.criaPessoa('joão', 25, 180);
+
+Criando parâmetros opcionais.
+
+Para criar um parâmetro opcional basta adicionar o "?" ao final de um parâmetro e não se esqueca se implementar uma lógica no constructor para que caso o parâmetro tenha um argumento ele seja adicionado corretamente.
+
+Ex: classe Pessoa {
+    private nome: string,
+    private idade: number,
+    private altura = 1,75
+
+    constructor(nome: string, idade: number, altura?: number) {
+        this.nome = nome,
+        this.idade - idade
+        if(altura) this.altura = altura
+    }
+}
+
+Na lógica implementada para altura significa que se o parâmetro altura receber um argumento ele será setado em this.altura, caso contrário this.altura será 1,75.
+
+Regra sobre argumento opcional
+
+Eles devem sempre ser declarados por último, caso contrário o código não será compilado.
