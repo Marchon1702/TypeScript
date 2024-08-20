@@ -1,0 +1,83 @@
+Mais sobre decorators
+
+Para usar parâmetros em decorators basta adiciona-los nos parenteses ao criar a função, esse parâmetros serão válidos dentros das outras funções retornadas dentro do decorator por com do escopo léxico do JavaScript.
+
+Decorators sem parâmetros
+
+Embora possa causar problemas futuros podemos criar decorators sem parâmetros, basta ao invés de retornar uma função anônima com os parâmetros do decorator, retornar esses parâmetros do decorator nos parenteses da função principal.
+
+Ao invés disso: 
+Ex: export decoratorName() {
+    return  function(
+        target: any,
+        propertyKey: string,
+        descriptor: PropertyDescriptor
+    ) {
+        ...Lógica do decorator
+    }
+    return descriptor
+}
+
+Faça isso: 
+Ex: export decoratorName(
+    target: any,
+    propertyKey: string,
+    descriptor: PropertyDescriptor
+) {
+    ...Lógica do decorator
+    return descriptor
+}
+
+Atenção: a declaração do decorator muda, caso ele seja feito sem parâmetro chamamos ele sem parenteses. "@decoratorName"
+
+
+Ordem de Decorators
+
+Caso chamarmos mais de um decorator a ordem de execução deles é feita da seguinte forma.
+Do topo pra baixo eles são executados, mas são aplicados de baixo pra cima.
+
+Ex: export function decoratorName(
+    target: any,
+    propertyKey: string,
+    descriptor: PropertyDescriptor
+) {
+    const metodoOriginal = descriptor.value
+    descriptor.value = function (...args: any[]) {
+        ...Lógica do decorator
+        const retorno = metodoOriginal.apply(this, args) // Essa declarção é feita para dizermos que o código do método original será executado agr.
+        ...Lógica do decorator
+        return retorno
+    }
+
+    return descriptor;
+}
+
+Ex: export function decoratorName2(
+    target: any,
+    propertyKey: string,
+    descriptor: PropertyDescriptor
+) {
+    const metodoOriginal = descriptor.value
+    descriptor.value = function (...args: any[]) {
+        ...Lógica do decorator
+        ...Lógica do decorator
+        const retorno = metodoOriginal.apply(this, args) // Essa declarção é feita para dizermos que o código do método original será executado agr.
+        return retorno
+    }
+
+    return descriptor;
+}
+
+Se chamarmos os decorators da seguinte forma 
+
+@decoratorName
+@decoratorName2
+método() {
+    ...
+}
+
+O decoratorName vai ser executado primeiro porém o decoratorName2 vai ser aplicado primerio, resumindo... A execução é de cima para baixo mas a aplicação é de baixo para cima.
+
+Achando o nome da classe que estamos usando o this.
+
+Após usar um metodoOriginal.apply(this, args) que é um método que recupera o this para o contexto original usando a linha "this.constructor name" eu digo que quero acessar o nome do constructor do this que é o nome da classe na qual o metodoOriginal se encontra.
