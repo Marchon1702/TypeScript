@@ -1,0 +1,79 @@
+Sobre Decorators
+
+Decorators é um recurso utilizado quando temos códigos não funcionais na aplicação, ou seja, códigos que não mudam a perfomace direta da aplicação e só servem para o desenvolvedor, Decorators também podem ser usados em situações onde vários métodos terão uma parte de código idêntica, então para não ficarmos repetindo o mesmo código diversas verzes usamos um decorator.
+
+Utilização do Decorator
+
+Decorator necessita de ativação manual em ts.config.json: ""experimentalDecorators": true".
+
+Criando uma pasta separada para decorators, exportamos uma função com os seguintes parâmetros: target, propertyKey, descriptor.
+
+Abaixo temos a forma padrão de um decorator:
+
+Ex: export function nomeDaFuncao() {
+    return(
+        target: any,
+        propertyKey: string,
+        descriptor: PropertyDescriptor
+    ) {
+        return descriptor
+    }
+}
+
+Sobre os parâmetros passados
+
+target = Se o decorator estiver em cima de um método estático ele será um construtor daquela classe, se for em cima de um método não estático ele será o prototype daquela classe.
+
+propertyKey = Responsável por guardar o nome do método no qual o construtor está se "espelhando".
+
+descriptor = Ele é a referência direta do método original ou método "espelhado".
+
+descriptor.value = É o código que o método original retorna.
+
+Detalhes sobre implementação de decorators
+
+Para chamar um decorator precisamos importa-lo e chama-lo em cima do método ou função que queremos da seguinte forma:
+
+Ex: 
+
+@nomeDoDecorator
+método() {
+    ...logica do método
+}
+
+Lógica por trás do Decorator
+
+Ex: export function logarTempoDeExecucao() {
+  return function (
+    target: any,
+    propertyKey: string,
+    descriptor: PropertyDescriptor
+  ) {
+    const metodoOriginal = descriptor.value;
+    descriptor.value = function (...args: any[]) {
+      const t1 = performance.now();
+      const retorno = metodoOriginal.apply(this, args);
+      const t2 = performance.now();
+      console.log(
+        `O tempo de execução de ${propertyKey} é de ${(t2 - t1)/1000} segundos`
+      );
+      retorno;
+    };
+    return descriptor;
+  };
+}
+
+Guardamos a lógica do metodoOriginal em uma variavel;
+Acessamos o descriptor.value e atribuimos uma função anônima para ele;
+Nessa função implementamos o código que queremos repetir em diferentes métodos;
+Nesse caso é para descrobor o tempo de execução que método leva para executar complemtamente;
+Onde for necessário dicionamos uma variável retorno e atribuimos o método original para rodarmos a lógica especifica dele;
+Ao final esse decorator é uma função bem genérica, então adicionamos um retorno que caso o método retorne algo essa várivavel retorno ficará encarregada disso;
+
+Sobre a linha "descriptor.value = function (...args: any[])"
+
+Atribuindo uma função anônima no descriptor.value não sabemos quantos argumentos esse descriptor.value terá, a final ele representa diversos métodos diferentes, então "...agrs: any[]" quer dizer que os argumentos do método original serão espalhados da forma necessária, não importa quantos forem, porém, ele retornará esses argumentos em forma de array. 
+
+Sobre a linha "metodoOriginal.apply(this, args);"
+
+Nesse caso ".apply(this, args)" é uma forma de recuperar o this da instância na qual o método original será chamado, porque quando atribuimos um método de uma classe à uma váriavel ele perde o this original que é a sua instância. Então essa linha diz: "aplique o this novamente na sua instância e separe seus argumentos por vírgula.". Isso faz com que os argumentos sejam atribuidos da forma correta na chamada do método.
