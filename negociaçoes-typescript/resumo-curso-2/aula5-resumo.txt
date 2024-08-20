@@ -1,0 +1,40 @@
+Removendo comentários na hora de compilar.
+
+Caso nossa aplicação possua muitos comentários em seu código, não seria interessante compila-los ao navegador dentro do código javaScript, então podemos remover comentários na hora da compilação usando: "removeComments: true" dentro de compilerOptions.
+
+StricNullCheck.
+
+Adicionar o StricNullCheck em compilerOptions torna nosso código mais criterioso porém evitar atribuições erradas que são dificeis de perceber. O StricNullCheck checa se alguma variavel tem a possibilidade de ter um valor null e se você não declarar que ela realmente pode ser null o código não será compilado.
+
+Como passar na checagem do StricNullCheck.
+
+Na atribuição de elementos do DOM, sabemos que o querySelector retorna um HTMLElement ou Null, o StricNullCheck não aceita a possibilidade de retorno null a menos que ela seja declarada.
+
+No caso abaixo a variavel só aceita receber um HTMLElement e nada mais.
+
+const inputNome: HTMLElement = document.querySelector('#elemento');
+
+O StricNullCheck não compilará sabendo que inputNome pode receber null ao invés de um HTMLElement, pois não é isso q inputNome quer, então para resolver isso temos que fazer uma checagem.
+
+const inputNome: HTMLElement = document.querySelector('#elemento');
+(obs: Como inputNome já foi atribuido a um elemento a declaração HTMLElement poderia ser omitida, só foi declarada para clareza de explicação).
+
+if(inputNome) {
+    ...prossegue com o código
+} else {
+    throw Error('Elemento retornou null')
+}
+
+Assim o StricNullCheck deixará compilar porque ele percebeu que houve uma checagem de segurança.
+
+Assumindo risco e silenciando StricNullCheck.
+
+Para assumir o risco e prosseguir com o código podendo retornar null basta fazer da seguinte maneira.
+
+const inputNome = document.querySelector('#elemento') as HTMLElement;
+ou 
+const inputNome = <HTMLElement>document.querySelector('#elemento');
+
+As duas sintaxes significam o mesmo, porém a primeira é a mais recomendada para uso. Elas assumem que o inputNome receberá um HTMLElement, mas caso não aconteça você não receberá uma notifação sobre isso e poderá ser mais dificl encontrar o erro, por isso você assume um risco ao fazer isso.
+
+Detalhe: Element não é igual HTMLElement, caso você tenha certeza que o Element será um HTMLElement você pode silenciar esse Element.
