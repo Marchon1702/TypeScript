@@ -1,0 +1,48 @@
+Usando Interfaces
+
+Interface é um "shape" de como o desenvolvedor espera receber um arquivo, isso é util quando queremos receber determinados dados de tipos estaticos, ajuda no auxilio da construção do código se ajustando a autocompletes e o principal, caso o nome do atribuito que você queira receber mude, basta apenas mudar ele na interface com a opção "rename Symbol" que todos os lugares do código que recebem essa interface como tipo de dado serão modificados automaticamente.
+
+Ex: export interface NegociacoesDoDia {
+    montante: number;
+    vezes: number;
+}
+
+Agora quando esperarmos receber dados com esse "shape" é só declararmos ele como tipo de retorno.
+
+Ex: 
+
+class MinhaClasse {
+    public obterDados() {
+        const meusDados: NegociacoesDoDia = {
+            montante: 20,
+            vezes: 2
+        }
+    }
+}
+
+Encapsulando integração com APIs
+
+Temos como boa prática encapsular a conexão com APIs na pasta services, então podemos criar uma class "MinhaClasseService" que recebe um método para se integrar com uma API.
+
+Supondo que os dados sejam em formato JSON que normalmente retornam um array com objetos...
+
+Ex: export class MinhaClasseService {
+    public integraComApi: Promise<TipoDeDado[]> {
+        return fecth('url/de/endPoint')
+        .then(response => response.json())
+    }
+}
+
+Até aqui no código acima criamos um método que retorna uma promise até a parte em que ele é convertido em Json.
+
+Agora podemos em outro método, em uma classe do tipo controller por exemplo, dar continuidade ao tratamento desses dados usando promise.
+
+Ex: export class MinhaClasseController {
+
+    private minhaClasseService = new MinhaClasseService()
+
+    private TrataDados: void {
+       this.minhaClasseService.obterDados()
+       .then((dadosObetidos: TipoDeDado) => console.log(dadosObetidos))
+    }
+}
