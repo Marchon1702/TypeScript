@@ -1,0 +1,27 @@
+Decorator de propriedade
+
+A estrutura de um decorator de propriedade muda um pouco em relação ao de método.
+
+Ex: export function domInjector(seletor: string) {
+  return function (target: any, propertyKey: string) {
+
+    let elemento: HTMLElement;
+
+    const getter = function () {
+      if (!elemento) {
+        elemento = <HTMLElement>document.querySelector(seletor);
+      }
+      return elemento;
+    };
+
+    Object.defineProperty(
+        target, 
+        propertyKey, 
+        { get: getter }
+    );
+  };
+}
+
+Esse decorator serve para localizar o elemento do DOM e setar nas variaveis de uma classe, o target é o prototype, é a forma de se ter acesso direto aoa atributos e métodos da classe onde esse decorator está sendo chamado, propertyKey é o nome do atributo, após criarmos uma lógica para este atributo fazemos ele se tornar um getter, sendo assim tenho seu valor atributo por isso.
+
+O Object.defineProperty recebe o argumento target que é o prototype, o propertyKey que é o nome do atributo que está sendo setado como getter e a própria função de getter que setará um valor direto a esse atributo.
