@@ -1,0 +1,85 @@
+Relembrando: Quando sobrescrevemos um constructor de uma classe Pai, devemos colocar dentro de {} do contructor fa classe filha a função Super(), pois mesmo uma classe não tendo constructor definido explicitamente, por baixo dos panos elas tem "contructor(){};" .
+
+Poliformismo: é a capacidade de objetos(classes), terem mais de um tipo.
+
+Ex: class Pai {
+    metodoPai() {
+        ...lógica
+    }
+}
+
+class Filha extends Pai {
+    ...atributos e métodos
+}
+
+A classe Filha tem como tipo ela mesma e também pode ser declarada como tipo Pai.
+
+function criaInstância(): Filha {                      
+    filha = new Filha()
+    return filha
+}  
+
+function criaInstância(): Pai {
+    filha = new Filha()
+    return filha
+}
+
+Por mais que as duas funções retornem uma instância de Filha, dizer que Filha também é do tipo Pai é corretor porque Filha extends Pai. Isso é Poliformismo.
+
+Interfaces de métodos
+
+Se usassemos extends Pai para localizar classes que possuam o mesmo método da classe Pai e chamar esse método em uma função que recebe um argumento do tipo "classe Pai", isso daria certo, porém seria um desperdicio de extends.
+
+Então usamos o implements, que implementa uma interface com um método que determinadas classes vão ter em comum.
+
+Ex: export interface Imprimivel {
+    metodoEmComum();
+}
+
+Atenção, toda interface de método é abstract ou seja elas tem que ser reescritas quando forém implementadas em uma classe.
+
+class Filha implements Imprimivel {
+    metodoEmComum {
+        ...lógica reescrita.
+    }
+}
+
+class Neta implements Imprimivel {
+    metodoEmComum {
+        ...lógica reescrita.
+    }
+}
+
+Agora caso queiramos escrever uma função que recebe argumentos do tipo Imprimível, ele aceitará todas as classes que possuem um implements Imprimivel.
+
+implements aceita receber mais de um tipo em classes, oquê é outra vantagem em relação ao extends desnecessário.
+
+Interfaces com generics
+
+Inetrfaces podem receber um <T> Generics, caso você queria fazer uma inteface que receba como parametro objetos de diferentes tipos vc pode usar:
+
+Ex: export interface Comparavel<T> {
+    ehIgual(objeto: T): boolean;
+}
+
+Assim o argumento desse método poderá receber um tipo determinado de acordo com a class que recebe um implements de Comparavel.
+
+Usando extends em Interfaces
+
+Uma interface pode receber outras interfaces através do extends, quando extends é adicionado em interfaces ele aceita mais de um, diferente de quando é em classes.
+
+Ex: export interface Modelo<T> extends Imprimivel, Comparavel<T> {}
+
+Assim na declaração de implements em uma classe, o implements dela será modelo e dentro de modelo será comportado a interface Imprimivel e Comparavel, isso evita que declaremos muitas interfaces direto no implements da classe e polua o código.
+
+Em relação ao uso de generics em interfaces com extends o generics dever ser declarado na interface Modelo<T> e referenciado na Comparavel<T>, caso Imprimivel tivesse um generics tbm, bastaria criar outro em modelo e referencia-lo em Imprimivel
+
+Ex: export interface Modelo<T, K> extends Imprimivel<K>, Comparavel<T> {}
+
+Debugando aplicações 
+
+Para debugar um código pelo navegador podemos ir na aba sources do devTools e utilizar o comando ctrl + p, após isso escolher o nome do arquivo de código que deseja debuggar e começar.
+
+Debugando aplicações diretamente com o código em Ts no navegador.
+
+Ative a opção "sourceMap" em tsConfig.json, após salvar isso ir gerar nos arquivo de código js na Dist uma duplicata com a extensão .map, você deve referenciar corretamente ao navegador a pasta onde está seu codigo typeScript.
