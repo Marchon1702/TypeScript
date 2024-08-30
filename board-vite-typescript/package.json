@@ -1,0 +1,16 @@
+{
+  "name": "lista-de-tarefas",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "start": "tsc -w && vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.3",
+    "vite": "^5.4.1",
+    "vite-plugin-checker": "^0.7.2"
+  }
+}
