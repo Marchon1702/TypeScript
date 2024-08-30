@@ -4,9 +4,24 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Lista de Tarefas</title>
+    <link rel="stylesheet" href="./dist/styles/style.css" />
   </head>
   <body>
-    <div id="show"></div>
+    <section class="board-lista-de-tarefas">
+      <h1>Lista de Tarefas</h1>
+      <ul id="tarefas-area">
+        <span>Sua lista de Tarefas aparece aqui...</span>
+      </ul>
+      <form id="form" class="add-tarefas-area">
+        <input
+          type="text"
+          id="add-tarefas"
+          class="input-tarefas"
+          placeholder="Digite uma tarefa que queira adicionar..."
+        />
+        <button type="submit" id="btn__add">ADD</button>
+      </form>
+    </section>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
