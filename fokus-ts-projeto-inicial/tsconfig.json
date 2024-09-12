@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+        "outDir": "./",
+        "target": "ES6",
+        "noEmitOnError": true,
+        "noImplicitAny": true,
+        "strictNullChecks": true,
+        "removeComments": true
+    },
+    "include": ["./script-crud.ts"],
+    "exclude": [
+        "node_modules"
+    ]
+}

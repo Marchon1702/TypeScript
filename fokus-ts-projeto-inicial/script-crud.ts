@@ -41,6 +41,7 @@ const atualizarUI = () => {
 
   estadoInicial.tarefas.forEach((tarefa) => {
     const li = document.createElement("li");
+    //Estudar sobre padrão BEM
     li.classList.add("app__section-task-list-item");
 
     const taskIconSvg = `
@@ -72,6 +73,7 @@ const atualizarUI = () => {
         button.setAttribute('disabled', 'true')
         li.classList.add('app__section-task-list-item-complete')
     }
+  
 
     li.appendChild(svgIcon)
     li.appendChild(paragraph)
