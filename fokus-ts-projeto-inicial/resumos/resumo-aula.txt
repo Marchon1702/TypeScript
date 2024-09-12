@@ -1,0 +1,33 @@
+Conceitos do paradigma funcional.
+
+Na maioria dos casos as funções devem ser puras, ou seja, dado um mesmo argumento, a função sempre terá que retornar o mesmo valor.
+
+Ex: function soma(a: number, b: number) {
+    return a + b;
+}
+
+Caso eu chame a função soma 100 vezes dando os argumentos (2, 2) ela retornará 100 vezes o resultado 4. Isso é uma função pura. 
+
+Outra coisa da função pura é que elas devem ser imutaveis não causando efeito colateral. Ou seja, ele não deve alterar diretamente variaveis externas.
+
+Ex: let batata: string = 'crua'
+
+function assarBatata() {
+    return `assada`
+}
+
+A função não modificou o estado da batata diretamente e sim retornou um valor para que caso desejado, ele seja atribuido a batata, assim não causando efeitos colaterais.
+
+Conceito de imutabilidade
+
+É usado para não reatribuirmos valor a uma variavel criada anteriormente, para que o fluxo do código não precise voltar a checar um valor antigo.
+
+ex: const nome = Matheus
+
+function mudaNome(novoNome: string): string {
+    return novoNome;
+}
+
+const nomeAtualizado = mudaNome('Carlos')
+
+A variavel nome com o valor Matheus não foi alterada nem reatribuida, criamos uma nova sem mexer nessa antiga, com o tempo após o processo de desreferenciamento, o Js entenderá que nome não esta sendo mais usada e executará um processo chamado "Garbage collector", onde variaveis não mais referenciadas são apagadas da memória.
